@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/flash'
 require './lib/hangperson_game.rb'
+require 'byebug'
 
 class HangpersonApp < Sinatra::Base
 
@@ -41,9 +42,9 @@ class HangpersonApp < Sinatra::Base
     letter = params[:guess].to_s[0]
     begin
     once = @game.guess(letter)
-    flash[:message] = "You have already used that letter" if !once
+    flash[:message] = "You have already used that letter." if !once
     rescue
-      flash[:message] = "Invalid guess"    
+      flash[:message] = "Invalid guess." 
     end
     
     redirect '/show'
@@ -65,11 +66,13 @@ class HangpersonApp < Sinatra::Base
   
   get '/win' do
     ### YOUR CODE HERE ###
+		redirect 'show' unless @game.check_win_or_lose == :win
     erb :win # You may change/remove this line
   end
   
   get '/lose' do
     ### YOUR CODE HERE ###
+		redirect 'show' unless @game.check_win_or_lose == :lose
     erb :lose # You may change/remove this line
   end
   
