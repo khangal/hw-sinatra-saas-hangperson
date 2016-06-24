@@ -1,7 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/flash'
 require './lib/hangperson_game.rb'
-require 'byebug'
 
 class HangpersonApp < Sinatra::Base
 
